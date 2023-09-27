@@ -1,20 +1,13 @@
-from langchain import OpenAI, LLMMathChain, SerpAPIWrapper
-from langchain.agents import initialize_agent, Tool, AgentExecutor
-from langchain.chat_models import ChatOpenAI
-import os
 import chainlit as cl
-from langchain.chat_models import ChatOpenAI
+from langchain.agents import AgentExecutor
 from langchain.agents import load_tools, initialize_agent, AgentType
-import os
-
+from langchain.chat_models import ChatOpenAI
 
 
 @cl.on_chat_start
 def start():
     llm = ChatOpenAI(temperature=0.5, streaming=True)
-    tools = load_tools(
-        ["arxiv"]
-    )
+    tools = load_tools(["arxiv"])
 
     agent_chain = initialize_agent(
         tools,
